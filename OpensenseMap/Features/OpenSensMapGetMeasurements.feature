@@ -4,7 +4,7 @@ A short summary of the feature
 
 Scenario Outline: Get list of Measurements form Box
 	Given Setup a new connection to endoint 'https://api.opensensemap.org/boxes'
-	And Setup new request to endpint '/data'
+	And Setup new POST request to endpint '/data'
 	And Open a json file '<json>' and prepare with parameters '<jsonParam>'
 	And Send prepared requests <async>
 	Then Response status is '<statusCode>'
@@ -18,7 +18,7 @@ Scenario Outline: Get list of Measurements form Box
 
 Scenario Outline: Get list of Measurements form Box And Save it at database
 	Given Setup a new connection to endoint 'https://api.opensensemap.org/boxes'
-	And Setup new request to endpint '/data'
+	And Setup new POST request to endpint '/data'
 	And Open a json file '<json>' and prepare with parameters '<jsonParam>'
 	And Send prepared requests <async>
 	Then Response status is '<statusCode>'
@@ -31,7 +31,7 @@ Scenario Outline: Get list of Measurements form Box And Save it at database
 
 Scenario Outline: Get list of specific Measurements form Box 
 	Given Setup a new connection to endoint 'https://api.opensensemap.org/boxes/'
-	And Setup new request to endpint '/data'
+	And Setup new POST request to endpint '/data'
 	And Open a json file '<json>' and prepare with parameters '<jsonParam>'
 	And Send prepared requests <async>
 	Then Response status is '<statusCode>'
@@ -46,10 +46,12 @@ Scenario Outline: Get list of specific Measurements form Box
 
 Scenario Outline: Get last Measurements form Box 
 	Given Setup a new connection to endoint 'https://api.opensensemap.org/boxes/'
-	Given Prepare get url using '{0}/sensors' and '<parameters>' 
+	And Setup new GET request to endpint '{0}/sensors'
+	Given Prepare get url using '<parameters>' 
 	Given Send get requests <async>
 	Then Response status is '<statusCode>'
 	Examples: 
 	| async | statusCode | parameters               |
 	|       | OK         | 5bb1dab2043f3f001ba31b69 |
-	| async | OK         | 5bb1dab2043f3f001ba31b6b |
+	| async | OK         | 5bb1dab2043f3f001ba31b69 |
+	| async | NotFound   | 5bb1dab2043f3f001ba31b6b |
