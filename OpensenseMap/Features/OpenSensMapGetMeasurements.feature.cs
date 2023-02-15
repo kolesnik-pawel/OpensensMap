@@ -103,7 +103,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("Setup a new connection to endoint \'https://api.opensensemap.org/boxes\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
- testRunner.And("Setup new request to endpint \'/data\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("Setup new POST request to endpint \'/data\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 8
  testRunner.And(string.Format("Open a json file \'{0}\' and prepare with parameters \'{1}\'", json, jsonParam), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -144,7 +144,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("Setup a new connection to endoint \'https://api.opensensemap.org/boxes\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 21
- testRunner.And("Setup new request to endpint \'/data\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("Setup new POST request to endpint \'/data\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 22
  testRunner.And(string.Format("Open a json file \'{0}\' and prepare with parameters \'{1}\'", json, jsonParam), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -198,7 +198,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("Setup a new connection to endoint \'https://api.opensensemap.org/boxes/\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 34
- testRunner.And("Setup new request to endpint \'/data\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("Setup new POST request to endpint \'/data\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 35
  testRunner.And(string.Format("Open a json file \'{0}\' and prepare with parameters \'{1}\'", json, jsonParam), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -216,7 +216,8 @@ this.ScenarioInitialize(scenarioInfo);
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Get last Measurements form Box")]
         [NUnit.Framework.TestCaseAttribute("", "OK", "5bb1dab2043f3f001ba31b69", null)]
-        [NUnit.Framework.TestCaseAttribute("async", "OK", "5bb1dab2043f3f001ba31b6b", null)]
+        [NUnit.Framework.TestCaseAttribute("async", "OK", "5bb1dab2043f3f001ba31b69", null)]
+        [NUnit.Framework.TestCaseAttribute("async", "NotFound", "5bb1dab2043f3f001ba31b6b", null)]
         public void GetLastMeasurementsFormBox(string async, string statusCode, string parameters, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
@@ -239,12 +240,15 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("Setup a new connection to endoint \'https://api.opensensemap.org/boxes/\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 49
- testRunner.Given(string.Format("Prepare get url using \'{{0}}/sensors\' and \'{0}\'", parameters), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.And("Setup new GET request to endpint \'{0}/sensors\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 50
- testRunner.Given(string.Format("Send get requests {0}", async), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given(string.Format("Prepare get url using \'{0}\'", parameters), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 51
+ testRunner.Given(string.Format("Send get requests {0}", async), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 52
  testRunner.Then(string.Format("Response status is \'{0}\'", statusCode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
