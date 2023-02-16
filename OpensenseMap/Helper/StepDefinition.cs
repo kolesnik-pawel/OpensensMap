@@ -35,24 +35,19 @@ namespace OpensenseMap.StepDefinition
         public void SetupNewConnectionToEndpoint(string url)
         {
             client = new RestClient(url);
-
-
         }
 
         [Given(@"Setup new (POST|GET) request to endpint '(.*)'")]
         public void SetupRequestEndpint(string method, string endpointName)
-        {
-            method = $"{method[0].ToString().ToUpper()}{method.Substring(1).ToLower()}";
-            Method methodType = Enum.Parse<Method>(method);
+        {            
+            Method methodType = Enum.Parse<Method>(CapitalFirstLetter(method));
             request = new RestRequest(endpointName, methodType);
 
-            if(methodType ==Method.Post)
+            if(methodType == Method.Post)
             {
                 request.AddHeader("Content-Type", "application/json");
                 request.AddHeader("Authorization", ConfigurationManager.AppSettings["Bearer"]);
-            }
-
-            //request.AddParameter("bearer", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE0ODMwMDYxNTIsImV4cCI6MTQ4MzAwOTc1MiwiaXNzIjoibG9jYWxob3N0OjgwMDAiLCJzdWIiOiJ0ZXN0QHRlc3QuZGUiLCJqdGkiOiJmMjNiOThkNi1mMjRlLTRjOTQtYWE5Ni1kMWI4M2MzNmY1MjAifQ.QegeWHWetw19vfgOvkTCsBfaSOPnjakhzzRjVtNi-2Q");
+            }           
         }
 
         [Given(@"Open a json file '(.*)' and prepare with parameters '(.*)'")]
@@ -64,32 +59,54 @@ namespace OpensenseMap.StepDefinition
             request.AddParameter("application/json", jsonPrepared, ParameterType.RequestBody);
         }
 
-        [Given(@"Send prepared requests? (|async|)")]
-        public void GivenSendPreparedRequests(string asyn)
+        [Given(@"Send prepared (POST|GET) requests? (|async|)")]
+        public void GivenSendPreparedRequests(string method, string asyn)
         {
-            if (asyn == "async")
+            Method methodType = Enum.Parse<Method>(CapitalFirstLetter(method));
+            bool async = asyn == "" ? false : true;
+
+            try
             {
-                try
+                switch (methodType)
                 {
-                    //request.Method = Method.Post;
-                    responseTask = client.PostAsync(request);
-                    responseTask.Wait();
-                    this.statusCode = responseTask.Result.StatusCode;
+                    case Method.Post:
+                        if (async)
+                        {
+                            responseTask = client.PostAsync(request);
+                            responseTask.Wait();
+                        }
+                        else
+                        {
+                            response = client.Post(request);
+                        }
+                        break;
+                    case Method.Get:
+                        if (async)
+                        {
+                            responseTask = client.GetAsync(request);
+                            responseTask.Wait();
+                        }
+                        else
+                        {
+                            response = client.Get(request);
+                        }
+                        break;
+                }
+                if (async)
+                {
                     response = responseTask.Result;
+                    this.statusCode = responseTask.Result.StatusCode;
                 }
-                catch (Exception ex)
+                else
                 {
-                    this.statusCode = Enum.Parse<HttpStatusCode>(ex.InnerException.Message.Split(' ').Last());
+                    // response = client.Get(request);
+                    this.statusCode = response.StatusCode;
                 }
-
             }
-            else
+            catch (Exception ex)
             {
-                request.Method = Method.Post;
-                response = client.Post(request);
-                this.statusCode = response.StatusCode;
+                this.statusCode = Enum.Parse<HttpStatusCode>(ex.InnerException.Message.Split(' ').Last());
             }
-
         }
 
         [Then(@"Response status is '(OK|BadRequest|NotFound|BadGateway|Forbidden|UnprocessableEntity)'")]
@@ -192,6 +209,11 @@ namespace OpensenseMap.StepDefinition
             {
                 this.sqlConnection.Open();
             }
+        }
+
+        private string CapitalFirstLetter(string capital) 
+        {
+            return $"{capital[0].ToString().ToUpper()}{capital.Substring(1).ToLower()}";
         }
     }
 }

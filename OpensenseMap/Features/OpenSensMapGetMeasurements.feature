@@ -1,12 +1,10 @@
 ﻿Feature: OpenSensMapGetMeasurements
 
-A short summary of the feature
-
 Scenario Outline: Get list of Measurements form Box
 	Given Setup a new connection to endoint 'https://api.opensensemap.org/boxes'
 	And Setup new POST request to endpint '/data'
 	And Open a json file '<json>' and prepare with parameters '<jsonParam>'
-	And Send prepared requests <async>
+	And Send prepared POST requests <async>
 	Then Response status is '<statusCode>'
 	Examples: 
 | json               | jsonParam | statusCode          | async |
@@ -20,7 +18,7 @@ Scenario Outline: Get list of Measurements form Box And Save it at database
 	Given Setup a new connection to endoint 'https://api.opensensemap.org/boxes'
 	And Setup new POST request to endpint '/data'
 	And Open a json file '<json>' and prepare with parameters '<jsonParam>'
-	And Send prepared requests <async>
+	And Send prepared POST requests <async>
 	Then Response status is '<statusCode>'
 	Given Connect to database
 	Given Insert to database first row of retured values
@@ -33,7 +31,7 @@ Scenario Outline: Get list of specific Measurements form Box
 	Given Setup a new connection to endoint 'https://api.opensensemap.org/boxes/'
 	And Setup new POST request to endpint '/data'
 	And Open a json file '<json>' and prepare with parameters '<jsonParam>'
-	And Send prepared requests <async>
+	And Send prepared POST requests <async>
 	Then Response status is '<statusCode>'
 	Examples: 
 | json               | jsonParam                                                   | statusCode          | async |
@@ -48,7 +46,7 @@ Scenario Outline: Get last Measurements form Box
 	Given Setup a new connection to endoint 'https://api.opensensemap.org/boxes/'
 	And Setup new GET request to endpint '{0}/sensors'
 	Given Prepare get url using '<parameters>' 
-	Given Send get requests <async>
+	And Send prepared GET requests <async>
 	Then Response status is '<statusCode>'
 	Examples: 
 	| async | statusCode | parameters               |
