@@ -109,7 +109,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And(string.Format("Open a json file \'{0}\' and prepare with parameters \'{1}\'", json, jsonParam), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 9
- testRunner.And(string.Format("Send prepared requests {0}", async), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("Send prepared POST requests {0}", async), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 10
  testRunner.Then(string.Format("Response status is \'{0}\'", statusCode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -150,7 +150,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And(string.Format("Open a json file \'{0}\' and prepare with parameters \'{1}\'", json, jsonParam), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 23
- testRunner.And(string.Format("Send prepared requests {0}", async), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("Send prepared POST requests {0}", async), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 24
  testRunner.Then(string.Format("Response status is \'{0}\'", statusCode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -204,7 +204,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And(string.Format("Open a json file \'{0}\' and prepare with parameters \'{1}\'", json, jsonParam), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 36
- testRunner.And(string.Format("Send prepared requests {0}", async), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("Send prepared POST requests {0}", async), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 37
  testRunner.Then(string.Format("Response status is \'{0}\'", statusCode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -245,10 +245,10 @@ this.ScenarioInitialize(scenarioInfo);
 #line 50
  testRunner.Given(string.Format("Prepare get url using \'{0}\'", parameters), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 51
- testRunner.Given(string.Format("Send get requests {0}", async), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
 #line 52
+ testRunner.And(string.Format("Send prepared GET requests {0}", async), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 53
  testRunner.Then(string.Format("Response status is \'{0}\'", statusCode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
